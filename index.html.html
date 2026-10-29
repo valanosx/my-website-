@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4a070b">
+<title>Студенческое самоуправление — инициатива. действие. ответственность.</title>
+<style>
+:root{
+  --wine:#4a070b;--wine2:#650d12;--red:#a92b20;--cream:#f5efd9;
+  --sand:#d9c6a0;--teal:#8dbbb1;--ink:#251715;--muted:#c9b8a5;
+  --panel:#5b0a10;--line:rgba(245,239,217,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--wine);color:var(--cream);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(1180px,calc(100% - 44px));margin:auto}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700}
+h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif;font-weight:500;letter-spacing:-.035em}
+h1{font-size:clamp(3rem,8vw,7.8rem);line-height:.91;margin:24px 0}
+h2{font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.02;margin:12px 0 24px}
+h3{font-size:1.5rem;line-height:1.1;margin:0 0 12px}
+p{margin:0 0 16px}
+header{position:absolute;top:0;left:0;right:0;z-index:10;padding:24px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-weight:900;letter-spacing:.12em;font-size:1rem}
+.logo span{color:var(--teal)}
+.navlinks{display:flex;gap:24px;align-items:center;font-size:.8rem;color:#e7daca}
+.navlinks a:hover{color:var(--teal)}
+.menu-btn{display:none;background:transparent;border:1px solid var(--line);color:var(--cream);padding:8px 12px;border-radius:30px}
+.hero{min-height:740px;display:grid;align-items:center;position:relative;overflow:hidden;background:
+radial-gradient(ellipse at 78% 38%,rgba(180,53,37,.45),transparent 31%),
+linear-gradient(115deg,#290406 0%,#56090d 54%,#7a1718 100%);padding:130px 0 70px}
+.hero:after{content:"СС";position:absolute;right:-2vw;bottom:-13vw;font-size:clamp(18rem,43vw,44rem);font-weight:900;line-height:.8;color:rgba(245,239,217,.035);letter-spacing:-.12em;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;position:relative;z-index:1}
+.hero-copy{max-width:700px}
+.hero h1 span{color:var(--teal)}
+.lead{font-size:clamp(1.05rem,1.8vw,1.35rem);max-width:610px;color:#e2d5c3}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:99px;padding:13px 22px;font-size:.86rem;font-weight:700;transition:.2s;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:var(--teal);color:#18302d}.btn-primary:hover{transform:translateY(-2px);background:#b0d2ca}
+.btn-ghost{border-color:rgba(245,239,217,.55);color:var(--cream)}.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.hero-art{position:relative;min-height:430px;display:grid;place-items:center}
+.orbit{width:min(390px,80vw);aspect-ratio:1;border:1px solid rgba(245,239,217,.3);border-radius:50%;position:absolute;transform:rotate(-18deg)}
+.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid rgba(141,187,177,.45);border-radius:50%;inset:30px;transform:rotate(48deg)}
+.orbit:after{inset:65px;transform:rotate(-35deg)}
+.seal{width:280px;height:330px;background:linear-gradient(145deg,#e6d8b9,#bfa77e);color:var(--wine);border-radius:140px 140px 18px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(5deg);box-shadow:25px 30px 70px #21020480;position:relative}
+.seal .big{font-size:7rem;font-weight:900;letter-spacing:-.1em;line-height:.85}
+.seal .small{font-size:.7rem;letter-spacing:.18em;margin-top:20px;font-weight:bold}
+.seal .rule{width:65px;height:3px;background:var(--red);margin:18px}
+.floating{position:absolute;background:var(--red);color:var(--cream);padding:14px 17px;border-radius:3px;font-size:.72rem;letter-spacing:.08em;box-shadow:0 12px 30px #20030466}
+.float-a{top:12%;right:0;transform:rotate(7deg)}.float-b{bottom:9%;left:0;background:var(--teal);color:#18302d;transform:rotate(-6deg)}
+.marquee{background:var(--red);overflow:hidden;padding:13px 0;white-space:nowrap;font-family:Georgia,serif;font-size:1rem;letter-spacing:.13em}
+.marquee span{display:inline-block;animation:move 30s linear infinite}
+@keyframes move{to{transform:translateX(-50%)}}
+section{padding:100px 0}
+.section-head{display:flex;justify-content:space-between;gap:35px;align-items:end;margin-bottom:42px}
+.section-head p{max-width:410px;color:var(--muted)}
+.intro{background:var(--cream);color:var(--ink)}
+.intro .eyebrow{color:var(--red)}
+.formula{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px}
+.formula-card{padding:27px;background:#e8dfc6;border-top:3px solid var(--red);min-height:170px}
+.formula-card b{display:block;font-family:Georgia,serif;font-size:1.55rem;margin-bottom:8px}
+.formula-card span{color:#66544b;font-size:.92rem}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pillar{padding:28px;border:1px solid var(--line);min-height:255px;position:relative;background:linear-gradient(145deg,rgba(255,255,255,.035),transparent)}
+.pillar .num{font-size:2.8rem;color:var(--teal);font-family:Georgia,serif;margin-bottom:24px}
+.pillar p{color:var(--muted);font-size:.94rem}
+.pillar .symbol{font-size:1.5rem;position:absolute;right:24px;top:24px}
+.note{margin-top:25px;padding:22px 25px;border-left:3px solid var(--teal);background:rgba(141,187,177,.09);color:#eadfcd}
+.forms{background:#2e0507}
+.table-wrap{overflow-x:auto;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:680px;font-size:.9rem}
+th{text-align:left;background:#75131a;color:var(--cream);font-weight:700}
+th,td{padding:18px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+td{color:#dfd0bf}tbody tr:hover{background:rgba(255,255,255,.035)}
+td:first-child{color:var(--teal);font-weight:bold}
+.callout{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;margin-top:24px;padding:24px;background:#f0e5cb;color:var(--ink)}
+.callout .icon{font-size:2rem}
+.callout p{margin:0}
+.structure{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:start}
+.tree{padding:28px;background:#2e0507;border:1px solid var(--line);border-radius:4px;text-align:center}
+.tree-root{background:var(--teal);color:#16312c;padding:15px;font-weight:800;border-radius:3px}
+.tree-line{height:25px;width:1px;background:var(--sand);margin:auto}
+.tree-branches{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative}
+.tree-branches:before{content:"";position:absolute;top:-1px;left:16%;right:16%;height:1px;background:var(--sand)}
+.tree-branch{padding-top:18px;position:relative}
+.tree-branch:before{content:"";position:absolute;top:0;left:50%;height:18px;width:1px;background:var(--sand)}
+.tree-node{padding:12px 8px;border:1px solid rgba(245,239,217,.3);font-size:.78rem;min-height:60px;display:grid;place-items:center}
+.org-examples{display:grid;gap:12px}
+.org{border:1px solid var(--line);padding:19px 20px}
+.org summary{cursor:pointer;list-style:none;font-weight:bold;display:flex;justify-content:space-between;gap:12px}
+.org summary::-webkit-details-marker{display:none}
+.org summary:after{content:"+";color:var(--teal);font-size:1.3rem}
+.org[open] summary:after{content:"−"}
+.org p{color:var(--muted);margin:15px 0 0;font-size:.92rem}
+.leader{background:var(--cream);color:var(--ink)}
+.leader .eyebrow{color:var(--red)}
+.leader-highlight{margin-top:25px;padding:24px 28px;background:#4a070b;color:#fff7e8;border-left:7px solid #a92b20;box-shadow:0 10px 24px rgba(37,23,21,.14);font-size:1.08rem;font-weight:600;line-height:1.65}
+.leader-highlight strong{color:#8dbbb1}
+.leader-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+.quote{font-family:Georgia,serif;font-size:clamp(1.8rem,3.6vw,3.2rem);line-height:1.16}
+.quote em{color:var(--red);font-style:normal}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.trait{background:#e8dfc6;padding:20px}
+.trait strong{display:block;font-family:Georgia,serif;font-size:1.15rem;margin-bottom:6px}
+.trait span{font-size:.86rem;color:#65564a}
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.swot{padding:24px;min-height:190px;border:1px solid var(--line)}
+.swot h3{display:flex;gap:10px;align-items:center}.swot p{color:var(--muted);font-size:.92rem}
+.swot:nth-child(1){background:rgba(141,187,177,.1)}.swot:nth-child(2){background:rgba(169,43,32,.12)}
+.swot:nth-child(3){background:rgba(217,198,160,.08)}.swot:nth-child(4){background:rgba(255,255,255,.025)}
+.examples{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.example{padding:20px;background:#5a0a10;border:1px solid var(--line);font-size:.88rem}
+.example strong{display:block;color:var(--teal);margin-bottom:10px}
+.example b{color:var(--cream)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:step}
+.step{padding:22px;border:1px solid var(--line);min-height:145px;position:relative;counter-increment:step}
+.step:before{content:counter(step,decimal-leading-zero);display:block;font-family:Georgia,serif;font-size:2rem;color:var(--teal);margin-bottom:15px}
+.step p{font-size:.9rem;color:var(--muted);margin:0}
+.step h3{font-family:Arial,sans-serif;font-size:1rem;letter-spacing:0;font-weight:700}
+.checklist{background:var(--red);padding:55px 0}
+.checklist-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:center}
+.checklist h2{margin-bottom:12px}
+.thoughts{display:grid;gap:10px}
+.thought{display:flex;gap:14px;align-items:start;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.23)}
+.thought b{font-family:Georgia,serif;font-size:1.25rem;color:var(--teal)}
+.tools{padding:80px 0;background:#2c0507}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tool-card{background:#4a080d;padding:25px;border:1px solid var(--line)}
+.tool-card .emoji{font-size:1.8rem;margin-bottom:14px}
+.tool-card p{color:var(--muted);font-size:.9rem;margin:0}
+footer{padding:32px 0;background:#1e0304;color:#bba99a;font-size:.78rem}
+.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Гранты и личный контакт */
+.grants{background:#f5efd9;color:#251715}
+.grants .eyebrow{color:#a92b20}
+.grants-intro{max-width:760px;color:#65564a;font-size:1.03rem}
+.grant-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:32px}
+.grant-card{padding:25px;background:#e8dfc6;border-top:3px solid #a92b20;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.grant-card p{color:#65564a;font-size:.92rem;margin:0}
+.grant-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px;font-weight:700;color:#650d12}
+.grant-link:hover{color:#a92b20;text-decoration:underline}
+.grant-note{margin-top:20px;padding:20px 22px;background:#fff9e9;border-left:3px solid #8dbbb1;color:#493a31}
+.grant-highlight{margin-top:24px;padding:28px 30px;background:#4a070b;color:#fff7e8;border-left:8px solid #a92b20;box-shadow:0 12px 28px rgba(37,23,21,.18);font-size:1.08rem;line-height:1.7}
+.grant-highlight strong{display:block;margin-bottom:8px;color:#8dbbb1;font-family:Georgia,serif;font-size:1.55rem;line-height:1.2}
+.contact{background:linear-gradient(120deg,#2b0406,#650d12 65%,#7a1718)}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;max-width:900px}
+.contact-copy h2{margin:12px 0 20px}
+.contact-copy p{color:#e2d5c3;max-width:600px;font-size:1.05rem}
+.social-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 20px;border-radius:99px;font-weight:700;font-size:.9rem;border:1px solid rgba(245,239,217,.5);transition:.2s}
+.social-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.1)}
+.social-btn.vk{background:var(--teal);color:#18302d;border-color:var(--teal)}
+@media(max-width:800px){.grant-grid,.contact-grid{grid-template-columns:1fr}.contact-grid{gap:28px}.contact-copy{text-align:left}}
+@media(max-width:800px){
+ .navlinks{display:none;position:absolute;top:70px;left:22px;right:22px;background:#390609;padding:20px;flex-direction:column;align-items:flex-start;border:1px solid var(--line)}
+ .navlinks.open{display:flex}.menu-btn{display:block}
+ .hero{min-height:auto;padding:120px 0 55px}.hero-grid,.structure,.leader-grid,.checklist-grid{grid-template-columns:1fr}
+ .hero-art{min-height:340px}.seal{width:225px;height:270px}.seal .big{font-size:5.7rem}
+ section{padding:70px 0}.section-head{display:block}.section-head p{margin-top:16px}
+ .formula,.pillars,.examples,.tools-grid{grid-template-columns:1fr}
+ .formula-card{min-height:auto}.pillar{min-height:auto}.tree{padding:20px}
+ .steps{grid-template-columns:1fr 1fr}.leader-grid{gap:30px}
+}
+@media(max-width:480px){
+ .wrap{width:min(100% - 30px,1180px)}.hero-art{min-height:300px}.orbit{width:275px}.seal{width:190px;height:235px}
+ .float-a{right:-3px}.float-b{left:-3px}.steps,.swot-grid,.traits{grid-template-columns:1fr}
+ h1{font-size:3.4rem}.section-head{margin-bottom:28px}.callout{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee span{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">СС<span> / </span>САМОУПРАВЛЕНИЕ</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#meaning">Смысл</a><a href="#forms">Формы</a><a href="#structure">Структура</a><a href="#leader">Лидерство</a><a href="#swot">SWOT</a><a href="#grants">Гранты</a><a href="#plan">Планирование</a><a href="#contact">Связаться</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Открыть меню" aria-expanded="false">Меню ☰</button>
+  </div>
+</header>
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Студенческое самоуправление · Практический гид</div>
+      <h1>Инициатива.<br><span>Действие.</span><br>Ответственность.</h1>
+      <p class="lead">СС — это когда студенты не ждут, пока кто-то решит за них, а сами меняют жизнь своего университета к лучшему.</p>
+      <div class="actions"><a class="btn btn-primary" href="#meaning">Разобраться в теме ↘</a><a class="btn btn-ghost" href="#plan">Собрать свою идею</a></div>
+    </div>
+    <div class="hero-art" aria-label="Графическая композиция с буквами СС">
+      <div class="orbit"></div>
+      <div class="seal"><div class="big">СС</div><div class="rule"></div><div class="small">СТУДЕНТЫ<br>МЕНЯЮТ СРЕДУ</div></div>
+      <div class="floating float-a">НЕ «СВЕРХУ» — СНИЗУ</div>
+      <div class="floating float-b">ИДЕЯ → КОМАНДА → РЕЗУЛЬТАТ</div>
+    </div>
+  </div>
+</section>
+<div class="marquee"><span>СТУДЕНТЫ — УЧАСТНИКИ РЕШЕНИЙ ✳ ИНИЦИАТИВА ✳ САМОСТОЯТЕЛЬНОСТЬ ✳ ОТВЕТСТВЕННОСТЬ ✳ СТУДЕНТЫ — УЧАСТНИКИ РЕШЕНИЙ ✳ ИНИЦИАТИВА ✳ САМОСТОЯТЕЛЬНОСТЬ ✳ ОТВЕТСТВЕННОСТЬ ✳ </span></div>
+
+<section class="intro" id="meaning">
+ <div class="wrap">
+  <div class="eyebrow">01 / Основа</div>
+  <div class="section-head"><div><h2>Что такое<br>студенческое самоуправление?</h2></div><p>Это инициативная и самостоятельная деятельность студентов по решению вопросов студенческой жизни. Не управление студентами, а управление вместе со студентами.</p></div>
+  <div class="formula">
+   <div class="formula-card"><b>Инициатива</b><span>Замечать проблему и предлагать идею, а не ждать готового решения.</span></div>
+   <div class="formula-card"><b>Самостоятельность</b><span>Брать на себя задачи, принимать решения и действовать командой.</span></div>
+   <div class="formula-card"><b>Ответственность</b><span>Доводить начатое до результата и отвечать за свои решения.</span></div>
+  </div>
+ </div>
+</section>
+
+<section id="pillars">
+ <div class="wrap">
+  <div class="eyebrow">02 / Три кита</div><h2>На чём держится СС</h2>
+  <div class="pillars">
+   <article class="pillar reveal"><div class="symbol">↗</div><div class="num">01</div><h3>Творческая активность</h3><p>Каждый может попробовать себя в роли автора идеи, организатора, спикера или волонтёра.</p></article>
+   <article class="pillar reveal"><div class="symbol">◎</div><div class="num">02</div><h3>Реальная демократия</h3><p>Не имитация участия, а обсуждение, выборы, обратная связь и влияние на решения.</p></article>
+   <article class="pillar reveal"><div class="symbol">✳</div><div class="num">03</div><h3>Социально-правовая самозащита</h3><p>Умение представлять интересы студентов, отстаивать права и искать конструктивные решения.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="forms" id="forms">
+ <div class="wrap">
+  <div class="eyebrow">03 / Формы организации</div>
+  <div class="section-head"><div><h2>Какую форму выбрать?</h2></div><p>Форма определяет возможности и ограничения. Выбирать стоит не по красивому названию, а по целям, ресурсам и уровню самостоятельности.</p></div>
+  <div class="table-wrap"><table>
+   <thead><tr><th>Форма</th><th>Кто создаёт</th><th>Плюсы</th><th>Минусы</th></tr></thead>
+   <tbody>
+    <tr><td>Студенческий совет</td><td>Вуз — в структуре университета</td><td>Доступ к ресурсам, стабильность, связь с администрацией</td><td>Риск зависимости от администрации</td></tr>
+    <tr><td>Общественная организация</td><td>Сами студенты</td><td>Больше свободы, собственная структура, возможность получить статус юрлица</td><td>Регистрация и отчётность; ресурсы нужно искать самостоятельно</td></tr>
+    <tr><td>Студенческий клуб</td><td>Вуз или студенты</td><td>Гибкость, понятная тематика, проще вовлекать единомышленников</td><td>Узкая направленность и меньший охват</td></tr>
+   </tbody>
+  </table></div>
+  <div class="callout"><div class="icon">💡</div><p><strong>Практический лайфхак.</strong> Часто лучше всего работает смешанная модель: вуз предоставляет пространство и ресурсы, а студенты сохраняют демократическое управление через выборы, совет, открытое членство и обсуждение решений.</p></div>
+ </div>
+</section>
+
+<section id="structure">
+ <div class="wrap">
+  <div class="eyebrow">04 / Роли и ответственность</div>
+  <div class="section-head"><div><h2>Кто за что отвечает?</h2></div><p>Структура нужна не ради иерархии, а чтобы каждый понимал свою зону ответственности и знал, к кому обратиться.</p></div>
+  <div class="structure">
+   <div class="tree">
+    <div class="tree-root">ПРЕДСЕДАТЕЛЬ</div><div class="tree-line"></div>
+    <div class="tree-branches">
+     <div class="tree-branch"><div class="tree-node">Заместитель</div></div>
+     <div class="tree-branch"><div class="tree-node">Направления<br><small>наука · спорт · творчество · медиа</small></div></div>
+     <div class="tree-branch"><div class="tree-node">Актив и волонтёры</div></div>
+    </div>
+   </div>
+   <div><h3>Три модели из практики</h3><p style="color:var(--muted);margin-bottom:20px">У разных организаций разная логика устройства — структура должна соответствовать задачам.</p>
+    <div class="org-examples">
+     <details class="org"><summary>Организация № 1 · социально-правовая и досуговая</summary><p>Председатель → два направления → заместители → актив → корпус волонтёров: техническая служба, общая служба, жилищно-бытовая служба.</p></details>
+     <details class="org"><summary>Организация № 2 · спортивное объединение</summary><p>Председатель → заместитель → секретарь → медиа → партнёрство → волонтёры событий и продакшна → актив по видам спорта: волейбол, баскетбол, плавание, теннис, борьба.</p></details>
+     <details class="org"><summary>Организация № 3 · просветительский клуб</summary><p>Председатель → заместитель → команда руководителей направлений: психология, медицина, творчество и IT.</p></details>
+    </div>
+   </div>
+  </div>
+  <div class="note"><strong>Главное правило:</strong> чем больше организация, тем больше уровней координации. Но каждый участник должен понимать свои задачи, полномочия и ожидаемый результат.</div>
+ </div>
+</section>
+
+<section class="leader" id="leader">
+ <div class="wrap">
+  <div class="eyebrow">05 / Портрет лидера</div>
+  <div class="leader-grid">
+   <div><h2>Лидер — не должность.<br>Это способ действовать.</h2><p class="quote">«Лидер — это не начальник, а тот, кто создаёт условия, в которых команда <em>хочет работать.</em>»</p></div>
+   <div class="traits">
+    <div class="trait"><strong>Слышит</strong><span>Умеет слушать и учитывать разные мнения.</span></div>
+    <div class="trait"><strong>Объединяет</strong><span>Помогает людям увидеть общую цель.</span></div>
+    <div class="trait"><strong>Делегирует</strong><span>Доверяет задачи, а не пытается делать всё сам.</span></div>
+    <div class="trait"><strong>Отвечает</strong><span>Признаёт ошибки и держит слово.</span></div>
+    <div class="trait"><strong>Развивает</strong><span>Создаёт возможности для роста команды.</span></div>
+    <div class="trait"><strong>Даёт пример</strong><span>Показывает делом то, о чём говорит.</span></div>
+   </div>
+  </div>
+  <div class="leader-highlight"><strong>Настоящее лидерство — это поддержка.</strong><br>В одной команде лидера называют «мамой команды», в другой — человеком, на которого можно опереться. Суть одна: рядом с таким лидером люди чувствуют поддержку и хотят включаться.</div>
+ </div>
+</section>
+
+<section id="swot">
+ <div class="wrap">
+  <div class="eyebrow">06 / Диагностика</div>
+  <div class="section-head"><div><h2>Где вы сейчас?</h2></div><p>SWOT-анализ помогает увидеть внутренние сильные и слабые стороны, а также внешние возможности и угрозы. Это не поиск виноватых, а отправная точка для стратегии.</p></div>
+  <div class="swot-grid">
+   <div class="swot"><h3>🏆 Сильные стороны</h3><p>Что у нас уже получается? Какие навыки, связи, опыт и ценности дают преимущество?</p><strong>Использовать и масштабировать.</strong></div>
+   <div class="swot"><h3>🌱 Возможности</h3><p>Какие гранты, партнёры, пространства, конкурсы и запросы студентов можно задействовать?</p><strong>Превратить в новые проекты.</strong></div>
+   <div class="swot"><h3>🧩 Слабые стороны</h3><p>Чего не хватает внутри: людей, компетенций, финансов, узнаваемости или процессов?</p><strong>Закрывать через развитие.</strong></div>
+   <div class="swot"><h3>🛡️ Угрозы</h3><p>Что извне может помешать: выгорание, нехватка времени, конкуренция за ресурсы, изменения условий?</p><strong>Заранее готовить план действий.</strong></div>
+  </div>
+  <div class="examples">
+   <div class="example"><strong>Организация № 1</strong><b>Сильные:</b> хорошая команда, открытость, добровольность.<br><b>Слабые:</b> нет финансирования, небольшой охват и штаб, низкая узнаваемость.</div>
+   <div class="example"><strong>Организация № 2</strong><b>Сильные:</b> самоорганизация, новые знакомства, профориентация.<br><b>Слабые:</b> нет финансирования, небольшой охват и штат.</div>
+   <div class="example"><strong>Организация № 3</strong><b>Сильные:</b> доступность для всех, поддержка идей.<br><b>Слабые:</b> мало образовательных программ, невысокая презентабельность, узкая направленность.</div>
+  </div>
+  <div class="note"><strong>Вывод:</strong> слабые стороны есть у любой организации. Важно честно их назвать, выбрать одну-две приоритетные проблемы и превратить анализ в конкретный план улучшений.</div>
+ </div>
+</section>
+
+<section id="plan" style="background:#350508">
+ <div class="wrap">
+  <div class="eyebrow">07 / От идеи к результату</div>
+  <div class="section-head"><div><h2>Планирование «Стрелка»</h2></div><p>Девять вопросов, которые помогают превратить идею в понятный проект — от дебатов до большого фестиваля.</p></div>
+  <div class="steps">
+   <div class="step"><h3>Название проекта</h3><p>Как коротко и понятно называется идея?</p></div>
+   <div class="step"><h3>Видение</h3><p>Что должно измениться в результате?</p></div>
+   <div class="step"><h3>Цели</h3><p>Каких результатов хотим достичь?</p></div>
+   <div class="step"><h3>Задачи</h3><p>Какие конкретные шаги приведут к цели?</p></div>
+   <div class="step"><h3>Ресурсы</h3><p>Какие люди, деньги, площадки и материалы нужны?</p></div>
+   <div class="step"><h3>Факторы успеха</h3><p>Что обязательно должно сработать?</p></div>
+   <div class="step"><h3>Препятствия</h3><p>Что может пойти не так и как подготовиться?</p></div>
+   <div class="step"><h3>План действий</h3><p>Кто, что и к какому сроку делает?</p></div>
+   <div class="step"><h3>Ценность</h3><p>Зачем это нужно студентам и университету?</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="grants" id="grants">
+ <div class="wrap">
+  <div class="eyebrow">08 / Ресурсы для роста</div>
+  <div class="section-head"><div><h2>Гранты — топливо<br>для студенческих идей</h2></div><p class="grants-intro">Грант помогает превратить инициативу в реальный проект: провести форум, запустить образовательную программу, создать медиапроект или организовать городское событие. Для студенческого совета это не только финансирование, но и возможность показать результат, собрать сильную команду и вырасти в управлении.</p></div>
+  <div class="grant-grid">
+   <article class="grant-card"><div class="eyebrow">Для молодёжных инициатив</div><h3>Росмолодёжь.Гранты</h3><p>Поддержка социально значимых проектов молодых людей. Подходит для инициатив в сфере добровольчества, образования, творчества, спорта, медиа и развития молодёжных сообществ. Условия, возрастные рамки и сроки зависят от конкретного конкурса.</p><a class="grant-link" href="https://myrosmol.ru/" target="_blank" rel="noopener noreferrer">Перейти на портал ↗</a></article>
+   <article class="grant-card"><div class="eyebrow">Для команд и первичных отделений</div><h3>Гранты и конкурсы Движения Первых</h3><p>Возможность поддержать командные инициативы и проекты для детей и молодёжи. Особенно актуально, если вуз или команда участвуют в Движении Первых и соответствуют условиям конкретного отбора.</p><a class="grant-link" href="https://гранты.будьвдвижении.рф/" target="_blank" rel="noopener noreferrer">Смотреть конкурсы ↗</a></article>
+   <article class="grant-card"><div class="eyebrow">Для культурных и творческих проектов</div><h3>Президентский фонд культурных инициатив</h3><p>Поддерживает проекты в сфере культуры, искусства и креативных индустрий. Можно рассматривать для фестивалей, творческих лабораторий, культурных событий и медиапроектов — при условии, что заявитель соответствует требованиям конкурса.</p><a class="grant-link" href="https://фондкультурныхинициатив.рф/" target="_blank" rel="noopener noreferrer">Изучить условия ↗</a></article>
+   <article class="grant-card"><div class="eyebrow">Для некоммерческих организаций</div><h3>Фонд президентских грантов</h3><p>Поддерживает общественно значимые проекты НКО. Обычно заявителем выступает зарегистрированная некоммерческая организация, поэтому студсовету может понадобиться партнёр-НКО или отдельная организационная модель.</p><a class="grant-link" href="https://президентскиегранты.рф/" target="_blank" rel="noopener noreferrer">Открыть сайт фонда ↗</a></article>
+  </div>
+  <div class="grant-note"><strong>Не забывайте о региональных конкурсах.</strong> Гранты губернаторов, министерств, молодёжных центров, вузов и муниципалитетов могут быть ближе к вашей идее и иметь отдельные условия. Перед подачей проверяйте положение конкурса, кто имеет право быть заявителем, допустимые расходы, сроки и требования к отчётности.</div>
+  <div class="grant-highlight"><strong>Здесь можно заявить о себе.</strong>Грантовый проект — шанс стать руководителем большой инициативы: сформулировать идею, собрать сильную команду, распределить роли, договориться с партнёрами, управлять бюджетом и довести работу до измеримого результата. Не обязательно начинать с огромного бюджета — начинайте с проблемы, которая действительно важна студентам.</div>
+ </div>
+</section>
+
+<section class="tools">
+ <div class="wrap">
+  <div class="eyebrow">09 / Инструменты на каждый день</div><h2>Что помогает команде работать?</h2>
+  <div class="tools-grid">
+   <article class="tool-card"><div class="emoji">🗳️</div><h3>Открытая обратная связь</h3><p>Регулярно спрашивайте студентов, что им нужно, и сообщайте, какие решения приняты по итогам.</p></article>
+   <article class="tool-card"><div class="emoji">📋</div><h3>Протоколы и документы</h3><p>Фиксируйте решения, ответственных, сроки и итоги. Документы сохраняют историю и защищают договорённости.</p></article>
+   <article class="tool-card"><div class="emoji">📈</div><h3>Показатели результата</h3><p>Считайте не только количество мероприятий, но и участников, повторное вовлечение, решённые вопросы и отзывы.</p></article>
+   <article class="tool-card"><div class="emoji">🤝</div><h3>Партнёрства</h3><p>Ищите союзников среди кафедр, администрации, выпускников, НКО, бизнеса и городских сообществ.</p></article>
+   <article class="tool-card"><div class="emoji">🧠</div><h3>Профилактика выгорания</h3><p>Распределяйте нагрузку, проводите короткие встречи, отмечайте вклад участников и давайте людям отдыхать.</p></article>
+   <article class="tool-card"><div class="emoji">🔁</div><h3>Цикл улучшения</h3><p>После каждого проекта обсудите: что получилось, что не сработало и что команда сделает иначе в следующий раз.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="wrap contact-grid">
+   <div class="contact-copy">
+   <div class="eyebrow">Давай менять среду вместе</div>
+   <h2>Пиши, если хочешь поменять жизнь своего университета</h2>
+   <p>Есть идея, хочется запустить проект или ты ищешь команду, с которой можно делать по-настоящему важные вещи? Напиши мне — обсудим, с чего начать и как превратить задумку в действие.</p>
+   <div class="social-actions">
+    <a class="social-btn vk" href="https://vk.ru/valanosx" target="_blank" rel="noopener noreferrer" aria-label="Написать ВКонтакте">ВКонтакте ↗</a>
+    <a class="social-btn" href="https://t.me/valanosx" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram">Telegram ↗</a>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="checklist">
+ <div class="wrap checklist-grid">
+  <div><div class="eyebrow" style="color:#d8e8df">Финал / Запомнить</div><h2>Пять мыслей<br>на память</h2><p>Сохрани их как ориентиры для своей команды.</p></div>
+  <div class="thoughts">
+   <div class="thought"><b>01</b><span><strong>СС — это школа жизни,</strong> а не просто кружок.</span></div>
+   <div class="thought"><b>02</b><span><strong>Форма важна,</strong> но содержание важнее.</span></div>
+   <div class="thought"><b>03</b><span><strong>Лидерство — это действие,</strong> а не должность.</span></div>
+   <div class="thought"><b>04</b><span><strong>Планирование и анализ</strong> помогают двигаться осознанно.</span></div>
+   <div class="thought"><b>05</b><span><strong>Документы — это память и защита</strong> договорённостей.</span></div>
+  </div>
+ </div>
+</div>
+</main>
+<footer><div class="wrap footer-row"><span>СС / СТУДЕНЧЕСКОЕ САМОУПРАВЛЕНИЕ</span><span>Идеи становятся изменениями, когда у них есть команда.</span><a href="#top">Наверх ↑</a></div></footer>
+<script>
+const menuBtn=document.getElementById('menuBtn');
+const nav=document.getElementById('navlinks');
+menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'Закрыть ×':'Меню ☰';});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='Меню ☰';}));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
